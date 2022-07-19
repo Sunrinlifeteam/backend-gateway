@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { AuthModule } from './shared/modules/auth/auth.module';
 import { HelloModule } from './shared/modules/hello/hello.module';
 import { UserModule } from './shared/modules/user/user.module';
 
@@ -7,6 +8,7 @@ import { UserModule } from './shared/modules/user/user.module';
   imports: [
     HelloModule,
     UserModule,
+    AuthModule,
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: [`.env`],
