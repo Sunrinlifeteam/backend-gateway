@@ -1,26 +1,25 @@
-// import { Module } from '@nestjs/common';
-// import { ConfigService } from '@nestjs/config';
-// import { JwtModule } from '@nestjs/jwt';
-// import { PassportModule } from '@nestjs/passport';
-// import { AuthController } from './auth.controller';
-// import { AuthService } from './auth.service';
-// import { GoogleStrategy } from './passport/google.strategy';
-// import { LocalStrategy } from './passport/local.strategy';
+import { Module } from '@nestjs/common';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { JwtModule, JwtService } from '@nestjs/jwt';
+import { AuthController } from './auth.controller';
+import { AccessStrategy } from './strategies/access.strategy';
+import { GoogleStrategy } from './strategies/google.stratgy';
+import { RefreshStrategy } from './strategies/refresh.strategy';
 
-// @Module({
-//   imports: [
-//     PassportModule.register({
-//       defaultStrategy: 'jwt',
-//     }),
-//     JwtModule.registerAsync({
-//       useFactory: (configService: ConfigService) => ({
-//         secret: configService.get('JWT_SECRET'),
-//         signOptions: { expiresIn: '60s' },
-//       }),
-//       inject: [ConfigService],
-//     }),
-//   ],
-//   controllers: [AuthController],
-//   providers: [AuthService, GoogleStrategy, LocalStrategy],
-// })
-// export class AuthModule {}
+@Module({
+  imports: [
+    JwtModule.registerAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: async (configService: ConfigService) => ({
+        secret: configService.get<string>('ACCESS_TOKEN_SECRET'),
+        signOptions: {
+          expiresIn: configService.get<string>('ACCESS_TOKEN_EXPIRES_IN'),
+        },
+      }),
+    }),
+  ],
+  controllers: [AuthController],
+  providers: [JwtService, GoogleStrategy, AccessStrategy, RefreshStrategy],
+})
+export class AuthModule {}
