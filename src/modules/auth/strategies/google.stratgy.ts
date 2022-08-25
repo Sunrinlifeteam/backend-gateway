@@ -47,7 +47,8 @@ export class GoogleStrategy
       if (isNumeric(familyName))
         givenName = [familyName, (familyName = givenName)][0];
       const userClass = parseInt(givenName.substring(1, 3));
-      const user = await this.userService.createUser({
+      const user = {
+        id: 'uninitialized user',
         email,
         username: familyName,
         department: getDepartmentByClass(userClass),
@@ -56,7 +57,9 @@ export class GoogleStrategy
         number: +givenName.substring(3, 5),
         accountType: ACCOUNT_TYPE.STUDENT,
         role: 0,
-      });
+        createdDate: new Date(),
+        updatedDate: new Date(),
+      };
       return done(null, user);
     }
     return done(null, null, { reason: 'Unauthorized' });
