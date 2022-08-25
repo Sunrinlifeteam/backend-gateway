@@ -11,6 +11,7 @@ async function swagger(app: INestApplication) {
     .setDescription('Suninlife project REST API description')
     .setVersion('1.0')
     .addTag('REST')
+    .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('document/rest', app, document);

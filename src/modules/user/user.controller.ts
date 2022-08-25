@@ -7,6 +7,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { Client, ClientGrpc } from '@nestjs/microservices';
+import { ApiBearerAuth } from '@nestjs/swagger';
 import { Request } from 'express';
 import { Observable } from 'rxjs';
 import { grpcClientOptions } from 'src/shared/options/user.grpc';
@@ -24,6 +25,7 @@ export class UserController implements OnModuleInit {
   }
 
   @Get('/')
+  @ApiBearerAuth()
   @UseGuards(AccessGuard)
   getUser(@Req() req: Request): Observable<User> {
     return this.userService.getUserById({
