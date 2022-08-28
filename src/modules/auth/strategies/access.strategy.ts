@@ -9,6 +9,7 @@ import { Client, ClientGrpc } from '@nestjs/microservices';
 import { grpcClientOptions } from 'src/shared/options/auth.grpc';
 import { User } from 'src/shared/transfer/user.dto';
 import { IAccessPayload } from 'src/shared/transfer/auth.dto';
+import { lastValueFrom } from 'rxjs';
 
 envConfig();
 
@@ -32,7 +33,7 @@ export class AccessStrategy
     this.authService = this.client.getService<AuthService>('AuthService');
   }
 
-  validate(payload: IAccessPayload) {
-    return this.authService.accessValidate(payload);
+  async validate(payload: IAccessPayload): Promise<User> {
+    return await lastValueFrom(this.authService.accessValidate(payload));
   }
 }

@@ -1,8 +1,10 @@
 import {
+  Body,
   Controller,
   Get,
   OnModuleInit,
   Param,
+  Put,
   Req,
   UseGuards,
 } from '@nestjs/common';
@@ -12,7 +14,7 @@ import { Request } from 'express';
 import { Observable } from 'rxjs';
 import { grpcClientOptions } from 'src/shared/options/user.grpc';
 import { UserService } from 'src/shared/services/user.service';
-import { User } from 'src/shared/transfer/user.dto';
+import { UpdateUser, User } from 'src/shared/transfer/user.dto';
 import { AccessGuard } from '../auth/guards/access.guard';
 
 @Controller('user')
@@ -31,6 +33,14 @@ export class UserController implements OnModuleInit {
     return this.userService.getUserById({
       value: req.user.id,
     });
+  }
+
+  @Put('/')
+  @ApiBearerAuth()
+  @UseGuards(AccessGuard)
+  updateUser(@Req() req: Request, @Body() user: UpdateUser): Observable<User> {
+    user.id = req.user.id;
+    return this.userService.updateUser(user);
   }
 
   @Get('/:id')
