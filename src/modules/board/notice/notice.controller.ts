@@ -11,15 +11,13 @@ import {
   Res,
 } from '@nestjs/common';
 import { Client, ClientGrpc } from '@nestjs/microservices';
-import { ApiQuery } from '@nestjs/swagger';
 import { Response } from 'express';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { grpcClientOptions } from 'src/shared/options/board.grpc';
 import { NoticeService } from 'src/shared/services/board.service';
 import {
   GetNoticeListResponse,
   Notice,
-  PartialNotice,
   PartialNoticeForCreate,
   PartialNoticeForUpdate,
   SearchQuery,
