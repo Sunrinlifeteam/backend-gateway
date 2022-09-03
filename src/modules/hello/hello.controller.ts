@@ -1,9 +1,9 @@
 import { Controller, Get, OnModuleInit } from '@nestjs/common';
 import { Client, ClientGrpc } from '@nestjs/microservices';
-import { Empty } from 'google.protobuf';
+import { Empty } from 'google/protobuf/empty';
 import { Observable } from 'rxjs';
-import { grpcClientOptions } from 'src/shared/options/hello.grpc';
-import { Hello } from 'src/shared/transfer/hello.dto';
+import { grpcClientOptions } from 'shared/lib/options/hello.grpc';
+import { Hello } from 'shared/lib/transfer/hello.dto';
 
 interface HelloService {
   getHello(empty: Empty): Observable<Hello>;

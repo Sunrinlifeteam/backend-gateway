@@ -3,12 +3,12 @@ import { PassportStrategy } from '@nestjs/passport';
 import { Injectable, OnModuleInit } from '@nestjs/common';
 import { config as envConfig } from 'dotenv';
 import { ConfigService } from '@nestjs/config';
-import { UserEntity } from 'src/shared/access/user.dao';
-import { AuthService } from 'src/shared/services/auth.service';
+import { UserEntity } from 'shared/lib/access/user.dao';
+import { AuthService } from 'shared/lib/services/auth.service';
 import { Client, ClientGrpc } from '@nestjs/microservices';
-import { grpcClientOptions } from 'src/shared/options/auth.grpc';
-import { User } from 'src/shared/transfer/user.dto';
-import { IAccessPayload } from 'src/shared/transfer/auth.dto';
+import { grpcClientOptions } from 'shared/lib/options/auth.grpc';
+import { User } from 'shared/lib/transfer/user.dto';
+import { IAccessPayload } from 'shared/lib/transfer/auth.dto';
 import { lastValueFrom } from 'rxjs';
 
 envConfig();

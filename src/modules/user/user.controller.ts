@@ -12,9 +12,9 @@ import { Client, ClientGrpc } from '@nestjs/microservices';
 import { ApiBearerAuth } from '@nestjs/swagger';
 import { Request } from 'express';
 import { Observable } from 'rxjs';
-import { grpcClientOptions } from 'src/shared/options/user.grpc';
-import { UserService } from 'src/shared/services/user.service';
-import { UpdateUser, User } from 'src/shared/transfer/user.dto';
+import { grpcClientOptions } from 'shared/lib/options/user.grpc';
+import { UserService } from 'shared/lib/services/user.service';
+import { UpdateUser, User } from 'shared/lib/transfer/user.dto';
 import { AccessGuard } from '../auth/guards/access.guard';
 
 @Controller('user')

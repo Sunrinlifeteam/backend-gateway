@@ -13,15 +13,15 @@ import {
 import { Client, ClientGrpc } from '@nestjs/microservices';
 import { Response } from 'express';
 import { Observable } from 'rxjs';
-import { grpcClientOptions } from 'src/shared/options/board.grpc';
-import { NoticeService } from 'src/shared/services/board.service';
+import { grpcClientOptions } from 'shared/lib/options/board.grpc';
+import { NoticeService } from 'shared/lib/services/board.service';
 import {
   GetNoticeListResponse,
   Notice,
   PartialNoticeForCreate,
   PartialNoticeForUpdate,
   SearchQuery,
-} from 'src/shared/transfer/board.dto';
+} from 'shared/lib/transfer/board.dto';
 
 @Controller('board/notice')
 export class NoticeController implements OnModuleInit {

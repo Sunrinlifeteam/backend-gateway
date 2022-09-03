@@ -2,11 +2,11 @@ import { Injectable, OnModuleInit } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { ConfigService } from '@nestjs/config';
-import { AuthService } from 'src/shared/services/auth.service';
+import { AuthService } from 'shared/lib/services/auth.service';
 import { Request } from 'express';
 import { Client, ClientGrpc } from '@nestjs/microservices';
-import { grpcClientOptions } from 'src/shared/options/auth.grpc';
-import { IRefreshPayload } from 'src/shared/transfer/auth.dto';
+import { grpcClientOptions } from 'shared/lib/options/auth.grpc';
+import { IRefreshPayload } from 'shared/lib/transfer/auth.dto';
 import { firstValueFrom, map } from 'rxjs';
 
 @Injectable()

@@ -6,11 +6,11 @@ import { ConfigService } from '@nestjs/config';
 import {
   SUNRIN_STUDENT_EMAIL_PATTERN,
   ACCOUNT_TYPE,
-} from 'src/shared/constants';
-import { isNumeric, getDepartmentByClass } from 'src/shared/functions';
-import { UserService } from 'src/shared/services/user.service';
+} from 'shared/lib/constants';
+import { isNumeric, getDepartmentByClass } from 'shared/lib/functions';
+import { UserService } from 'shared/lib/services/user.service';
 import { Client, ClientGrpc } from '@nestjs/microservices';
-import { grpcClientOptions as userGrpc } from 'src/shared/options/user.grpc';
+import { grpcClientOptions as userGrpc } from 'shared/lib/options/user.grpc';
 
 envConfig();
 

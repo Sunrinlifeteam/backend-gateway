@@ -14,9 +14,9 @@ import { firstValueFrom } from 'rxjs';
 import {
   REFRESH_TOKEN_COOKIE_KEY,
   REFRESH_TOKEN_COOKIE_OPTION,
-} from 'src/shared/constants';
-import { grpcClientOptions } from 'src/shared/options/auth.grpc';
-import { AuthService } from 'src/shared/services/auth.service';
+} from 'shared/lib/constants';
+import { grpcClientOptions } from 'shared/lib/options/auth.grpc';
+import { AuthService } from 'shared/lib/services/auth.service';
 import { GoogleGuard } from './guards/google.guard';
 import { RefreshGuard } from './guards/refresh.guard';
 
