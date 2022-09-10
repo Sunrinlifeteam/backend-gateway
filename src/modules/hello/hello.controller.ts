@@ -1,21 +1,31 @@
-import { Controller, Get, OnModuleInit } from '@nestjs/common';
-import { Client, ClientGrpc } from '@nestjs/microservices';
-import { Empty } from 'google/protobuf/empty';
+import {
+  Controller,
+  Get,
+  Inject,
+  Injectable,
+  OnModuleInit,
+} from '@nestjs/common';
+import { ClientGrpc } from '@nestjs/microservices';
 import { Observable } from 'rxjs';
-import { grpcClientOptions } from 'shared/lib/options/hello.grpc';
 import { Hello } from 'shared/lib/transfer/hello.dto';
+import {
+  HelloServiceClient,
+  HELLO_PACKAGE_NAME,
+  HELLO_SERVICE_NAME,
+} from 'shared/lib/generated/hello';
 
-interface HelloService {
-  getHello(empty: Empty): Observable<Hello>;
-}
-
+@Injectable()
 @Controller('hello')
 export class HelloController implements OnModuleInit {
-  @Client(grpcClientOptions) private readonly client: ClientGrpc;
-  private helloService: HelloService;
+  private helloService: HelloServiceClient;
+
+  constructor(
+    @Inject(HELLO_PACKAGE_NAME) private readonly client: ClientGrpc,
+  ) {}
 
   onModuleInit() {
-    this.helloService = this.client.getService<HelloService>('HelloService');
+    this.helloService =
+      this.client.getService<HelloServiceClient>(HELLO_SERVICE_NAME);
   }
 
   @Get('/')
